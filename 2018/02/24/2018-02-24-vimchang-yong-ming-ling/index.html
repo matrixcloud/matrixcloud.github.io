@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>Vim常用命令 | Atom's Blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script><link rel="icon" mask sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Vim常用命令</h1><a id="logo" href="/.">Atom's Blog</a><p class="description">操千曲而后晓声，观千剑而后识器</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Vim常用命令</h1><div class="post-meta">Feb 24, 2018<span> | </span><span class="category"><a href="/categories/Linux/">Linux</a></span></div><a class="disqus-comment-count" data-disqus-identifier="2018/02/24/2018-02-24-vimchang-yong-ming-ling/" href="/2018/02/24/2018-02-24-vimchang-yong-ming-ling/#disqus_thread"></a><div class="post-content"><p>本人非<code>Vim党</code>，亦不属于<code>Emacs圣教</code>，平常喜欢与<code>VSCode</code>玩耍。只是，在Linux服务器上配置时，避免不了使用Vi/Vim，记住一些命令，能提高编辑效率，故记之。</p>
+<h2 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">set nu # 显示行号</span><br><span class="line">syntax on # 启用语法高亮</span><br><span class="line"># tab 4空格</span><br><span class="line">set ts=4</span><br><span class="line">set sw=4</span><br><span class="line">set autoindent # 自动缩进</span><br></pre></td></tr></table></figure>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><ul>
+<li>剪切：<code>d</code></li>
+<li>剪切当前行: <code>dd</code></li>
+<li>复制当前行: <code>yy</code></li>
+<li>粘贴：<code>p</code>(lowercase 向下粘贴)、<code>P</code>(uppercase 向上粘贴)</li>
+<li>多行注释<ol>
+<li>按<code>v</code>，进入Visual模式</li>
+<li><code>j, k</code>选择要注释的行</li>
+<li>按下大写<code>I</code>，进入插入模式</li>
+<li>输入，注释符(//, #)</li>
+<li>ESC退出后，等一会才会出现多行注释</li>
+</ol>
+</li>
+<li>取消多行注释<ol>
+<li>按<code>v</code>，进入Visual模式</li>
+<li><code>j, k</code>选择要取消注释的行</li>
+<li>按下<code>x</code>或<code>d</code></li>
+</ol>
+</li>
+<li>多行缩进<ol>
+<li>按<code>v</code>，进入Visual模式</li>
+<li><code>j, k</code>选择要缩进的行</li>
+<li><code>&lt;</code>(左缩进)、<code>&gt;</code>(右缩进)</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p><a href="https://vim-adventures.com/" target="_blank" rel="noopener">Vim小游戏</a></p>
+</blockquote>
+</div><div class="tags"></div><div class="post-nav"><a class="pre" href="/2018/03/18/2018-03-18-zuul-1-dot-xde-gong-zuo-yuan-li/">Zuul 1.x的工作原理</a></div><div id="disqus_thread"><div class="btn_click_load"><button class="disqus_click_btn">阅读评论（请确保 Disqus 可以正常加载）</button></div><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'http://atom.peg.ink/2018/02/24/2018-02-24-vimchang-yong-ming-ling/';
+    this.page.identifier = '2018/02/24/2018-02-24-vimchang-yong-ming-ling/';
+    this.page.title = 'Vim常用命令';
+  };</script><script type="text/javascript" id="disqus-lazy-load-script">$.ajax({
+url: 'https://disqus.com/next/config.json',
+timeout: 2500,
+type: 'GET',
+success: function(){
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//matcloud## Your disqus_shortname, e.g. username.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  (d.head || d.body).appendChild(s);
+  $('.disqus_click_btn').css('display', 'none');
+},
+error: function() {
+  $('.disqus_click_btn').css('display', 'block');
+}
+});</script><script type="text/javascript" id="disqus-click-load">$('.btn_click_load').click(() => {  //click to load comments
+    (() => { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//matcloud## Your disqus_shortname, e.g. username.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    $('.disqus_click_btn').css('display','none');
+});</script><script type="text/javascript" id="disqus-count-script">$(function() {
+     var xhr = new XMLHttpRequest();
+     xhr.open('GET', '//disqus.com/next/config.json', true);
+     xhr.timeout = 2500;
+     xhr.onreadystatechange = function () {
+       if (xhr.readyState === 4 && xhr.status === 200) {
+         $('.post-meta .post-comments-count').show();
+         var s = document.createElement('script');
+         s.id = 'dsq-count-scr';
+         s.src = 'https://matcloud## Your disqus_shortname, e.g. username.disqus.com/count.js';
+         s.async = true;
+         (document.head || document.body).appendChild(s);
+       }
+     };
+     xhr.ontimeout = function () { xhr.abort(); };
+     xhr.send(null);
+   });
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"><input type="hidden" name="sitesearch" value="http://atom.peg.ink"></form></div><div class="widget"><div class="widget-title"><span> 分类</span></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/游记/">游记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul></div><div class="widget"><div class="widget-title"><span> 标签</span></div><div class="tagcloud"><a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/css/" style="font-size: 15px;">css</a></div></div><div class="widget"><div class="widget-title"><span> 最近文章</span></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/12/16/2018-12-16-dui-octozhu-ti-de-zheng-gai/">对Octo主题的整改</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/09/2018-12-09-du-headfirstshe-ji-mo-shi/">读HeadFirst设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/15/2018-07-15-shi-yong-pythonwan-bu-ke-pai/">使用Python玩扑克牌</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/19/2018-05-19-qing-hai-you-ji/">青海游记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/11/2018-04-11-ji-yu-springbootde-api-keyshi-xian/">基于SpringBoot的API Key实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/20/2018-03-20-yao-you-ya-,qi-ge-pythondai-ma-de-xiao-ji-qiao/">要优雅，七个Python代码的小技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/18/2018-03-18-zuul-1-dot-xde-gong-zuo-yuan-li/">Zuul 1.x的工作原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/24/2018-02-24-vimchang-yong-ming-ling/">Vim常用命令</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><script type="text/javascript" src="//matcloud## Your disqus_shortname, e.g. username.disqus.com/recent_comments_widget.js?num_items=5&amp;hide_avatars=1&amp;avatar_size=32&amp;excerpt_length=20&amp;hide_mods=1"></script></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2019 <a href="/." rel="nofollow">Atom's Blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
