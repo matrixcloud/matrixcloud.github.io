@@ -1,0 +1,3 @@
+[submodule "themes/futu"]
+	path = themes/futu
+	url = https://github.com/yuanji-dev/futu.git
