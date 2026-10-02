@@ -1,0 +1,19 @@
+{{/*
+  Project override of the theme's layouts/partials/footer.html (futu@195c378).
+  Upstream reads .Site.Author.name; Hugo removed that field (page.Site has no
+  Author), which aborts the build on Hugo >= 0.158 with
+  "can't evaluate field Author in type page.Site". The deprecated top-level
+  `author` config key was never set in this project anyway, so the copyright
+  line rendered empty even on older Hugo. Read the documented params.author
+  instead; this works on Hugo 0.145 and on 0.158+ alike.
+*/}}
+<p>
+  {{ (printf (i18n "powered") (printf `<a target="_blank" rel="noopener" href="https://gohugo.io">Hugo %s</a>` .Site.Hugo.Version)) | safeHTML }}
+  |
+  {{ i18n "theme" }}
+  <a target="_blank" rel="noopener" href="https://github.com/yuanji-dev/futu">futu@v2</a>
+  <br />
+  Copyright ©
+  {{ .Site.Params.Since }}-{{ now.Format "2006" }}
+  {{ .Site.Params.author.name }} All Rights Reserved.
+</p>

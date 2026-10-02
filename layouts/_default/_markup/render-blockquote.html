@@ -1,0 +1,36 @@
+{{/*
+  Blockquote render hook: Obsidian/GitHub callouts (`> [!tip] …`) rendered with
+  the theme's own notice markup, icons and i18n titles (futu ships a `notice`
+  shortcode but no blockquote hook, so callouts used to render as plain quotes).
+  `> [!tip] title` → notice titled `title`; the remaining lines are the body.
+  Obsidian types are mapped onto the theme's four styles (note/info/tip/warning);
+  unknown types keep the note style with their original label as title.
+  Blockquotes without a marker render like Hugo's default.
+*/}}
+{{- if eq .Type "alert" -}}
+  {{- $types := slice "note" "info" "tip" "warning" -}}
+  {{- $aliases := dict
+    "hint" "tip" "important" "tip" "success" "tip" "check" "tip" "done" "tip"
+    "warn" "warning" "caution" "warning" "attention" "warning" "danger" "warning"
+    "error" "warning" "failure" "warning" "fail" "warning" "missing" "warning" "bug" "warning"
+    "todo" "note" "example" "note" "abstract" "note" "summary" "note" "tldr" "note"
+    "question" "note" "help" "note" "faq" "note" "quote" "note" "cite" "note"
+  -}}
+  {{- $name := lower (printf "%s" .AlertType) -}}
+  {{- $style := cond (in $types $name) $name (or (index $aliases $name) "note") -}}
+  {{- $title := printf "%s" .AlertTitle -}}
+  {{- if not $title -}}
+    {{- $title = cond (in $types $name) (i18n $style) $name -}}
+  {{- end -}}
+  <div class="notice {{ $style }}">
+    <p class="notice-title">
+      <span class="icon-notice baseline">{{ printf "icons/%s.svg" $style | readFile | safeHTML }}</span>
+      {{ $title | safeHTML }}
+    </p>
+    {{ .Text | safeHTML }}
+  </div>
+{{- else -}}
+  <blockquote>
+    {{ .Text | safeHTML }}
+  </blockquote>
+{{- end -}}

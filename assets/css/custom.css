@@ -1,0 +1,9 @@
+/* Project CSS: concatenated after the theme's stylesheets (see head.html). */
+
+/* MathML produced by layouts/_default/_markup/render-passthrough.html */
+math[display="block"] {
+  display: block;
+  margin: 1em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}

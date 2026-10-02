@@ -1,0 +1,37 @@
+{{/*
+  Project override of the theme's layouts/_default/index.html (futu@195c378).
+  Upstream renders a home block for every section named in params.mainSections,
+  including ones that do not exist yet (ghost "最新" block whose 查看全部 link
+  points back at the home page) or have no published pages (empty block).
+  Such sections are skipped here; rendering is otherwise identical.
+*/}}
+{{ define "main" }}
+  {{ $sectionSlice := slice }}
+  {{ range site.Params.mainSections }}
+    {{ $section := site.GetPage "section" . }}
+    {{ with $section }}
+      {{ $pages := where .RegularPages "Draft" "eq" false }}
+      {{ if $pages }}
+        {{ $sectionSlice = $sectionSlice | append (dict "section" . "pages" $pages.ByPublishDate.Reverse "date" (index $pages.ByPublishDate.Reverse 0).PublishDate) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ range sort $sectionSlice "date" "desc" }}
+    <article class="home-section">
+      <header>
+        <h2>{{ printf (i18n "latest") .section.Title }}</h2>
+      </header>
+      <ul class="pages-list">
+        {{ range first (site.Params.homePaginate | default 5) .pages }}
+          <li>
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            <small><time datetime="{{ partial "rfc3339.html" .PublishDate }}">{{ .PublishDate.Format (site.Params.dateFormatToUse | default "2006-01-02") }}</time></small>
+          </li>
+        {{ end }}
+        <li>
+          <a href="{{ .section.RelPermalink }}">{{ i18n "viewAll" }} →</a>
+        </li>
+      </ul>
+    </article>
+  {{ end }}
+{{ end }}

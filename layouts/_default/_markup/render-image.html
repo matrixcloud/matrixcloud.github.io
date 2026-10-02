@@ -1,0 +1,47 @@
+{{/*
+  Project override of the theme's layouts/_default/_markup/render-image.html
+  (futu@195c378). Upstream assumes every image destination resolves to a page
+  resource and aborts the whole build otherwise (nil pointer on .MediaType) —
+  triggered by "./"-prefixed paths, images in static/, external URLs, missing
+  files, and SVG (Resize is unsupported). Page resources are still converted
+  to WebP; anything else renders as a plain <img> using the original
+  destination.
+*/}}
+{{- $dest := .Destination -}}
+{{- $image := .Page.Resources.GetMatch (strings.TrimPrefix "./" $dest) -}}
+{{- $dims := "" -}}
+{{- with $image -}}
+  {{- if eq .MediaType.SubType "svg" -}}
+    {{- /* not resizable; keep original, no dimensions */ -}}
+  {{- else if eq .MediaType.SubType "gif" -}}
+    {{- $dims = printf `width="%d" height="%d"` .Width .Height -}}
+  {{- else -}}
+    {{- $image = .Resize (print .Width "x" .Height " webp") -}}
+    {{- $dims = printf `width="%d" height="%d"` $image.Width $image.Height -}}
+  {{- end -}}
+{{- end -}}
+{{- $src := $dest -}}
+{{- with $image }}{{ $src = .RelPermalink }}{{ end -}}
+{{ if .IsBlock }}
+  <figure>
+    <img
+      class="post-image"
+      src="{{ $src }}"
+      alt="{{ .Text }}"
+      {{ with $dims }}{{ . | safeHTMLAttr }}{{ end }}
+      loading="lazy"
+      {{ with .Title }}title="{{ . }}"{{ end }}
+    />
+    <figcaption>{{ with .Title }}{{ . | safeHTML }}{{ else }}{{ .Text | safeHTML }}{{ end }}</figcaption>
+  </figure>
+{{ else }}
+  <img
+    class="post-image"
+    src="{{ $src }}"
+    alt="{{ .Text }}"
+    {{ with $dims }}{{ . | safeHTMLAttr }}{{ end }}
+    loading="lazy"
+    {{ with .Title }}title="{{ . }}"{{ end }}
+  />
+  <span>{{ with .Title }}{{ . | safeHTML }}{{ else }}{{ .Text | safeHTML }}{{ end }}</span>
+{{ end }}

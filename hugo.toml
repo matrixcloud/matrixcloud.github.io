@@ -25,13 +25,15 @@ hasCJKLanguage = true
   # Site creation time
   since = "2025"
   paginate = 10
+  # Top-level sections listed on the home page and included by the archives page.
+  mainSections = ["posts", "embedded-c"]
   # The date format to use; for a list of valid formats, see https://gohugo.io/functions/format/
   dateFormatToUse = "2006/01/02"
   # Whether display TOC or not.
   toc = true
   enableRelated = true
   googleVerification = ""
-  enableEmojiZoomJS = true
+  enableZoomJS = true
 
 [params.git]
   repo = "git@github.com:matrixcloud/blog.git"
@@ -62,6 +64,13 @@ hasCJKLanguage = true
   unsafe = true
 [markup.goldmark.parser]
   wrapStandAloneImageWithinParagraph = false
+# Obsidian-style math: $...$ inline, $$...$$ block (rendered by the
+# render-passthrough hook via transform.ToMath).
+[markup.goldmark.extensions.passthrough]
+  enable = true
+  [markup.goldmark.extensions.passthrough.delimiters]
+    block = [['$$', '$$'], ['\[', '\]']]
+    inline = [['$', '$'], ['\(', '\)']]
 [markup.highlight]
   anchorLineNos = true
   codeFences = true
@@ -93,6 +102,11 @@ hasCJKLanguage = true
   weight = 20
   identifier = "archives"
   url = "/archives/"
+[[languages.zh-Hans.menu.main]]
+  name = "嵌入式 C"
+  weight = 25
+  identifier = "embedded-c"
+  url = "/embedded-c/"
 [[languages.zh-Hans.menu.main]]
   name = "标签"
   weight = 30

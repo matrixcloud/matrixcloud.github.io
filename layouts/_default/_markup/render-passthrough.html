@@ -1,0 +1,22 @@
+{{/*
+  Math render hook: converts goldmark passthrough content (Obsidian-style $…$
+  and $$…$$, plus \(…\) / \[…\]) to server-rendered KaTeX output through
+  transform.ToMath, so no client-side MathJax/KaTeX is needed.
+
+  Output is MathML (no KaTeX stylesheet required). A formula KaTeX cannot parse
+  is rendered inline as a red error instead of failing the whole build, and
+  logged as a warning with its source position.
+*/}}
+{{- $opts := dict "output" "mathml" "displayMode" (eq .Type "block") "throwOnError" false "errorColor" "#cc0000" -}}
+{{- with try (transform.ToMath .Inner $opts) -}}
+  {{- with .Err -}}
+    {{- warnf "transform.ToMath failed at %s: %s" $.Position . -}}
+    <code class="math-error">{{ $.Inner }}</code>
+  {{- else -}}
+    {{- $rendered := printf "%s" .Value -}}
+    {{- if strings.Contains $rendered "katex-error" -}}
+      {{- warnf "KaTeX could not parse the formula at %s: %s" $.Position $.Inner -}}
+    {{- end -}}
+    {{- $rendered | safeHTML -}}
+  {{- end -}}
+{{- end -}}
